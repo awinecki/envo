@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Build Creator Test Docker Images
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          clean: false
+      - name: Install shellspec
+        run: |
+          curl -fsSL https://git.io/shellspec | sh
+      - name: Run shellspec tests
+        run: shellspec
