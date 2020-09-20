@@ -11,7 +11,7 @@ Describe 'envo'
       result() { %text
         #|foofoo
         #|barbar
-        #|external script has been run WRONG
+        #|external script has been run
       }
       When call ./envo -s ./spec/test_external.sh
       The output should eq "$(result)"
