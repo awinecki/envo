@@ -38,11 +38,10 @@ function msg() {
 function print_running_command() {
   if [[ "$OPT_SILENT" == "false" ]]; then
     command=$1
-    envpath=$2
     if [[ "$OPT_NO_COLORS" == "true" ]]; then
-      printf "[$progname] running command '${command}' with env from $envpath..\n"
+      printf "[$progname] running command '${command}' with env from $ENVFILE..\n"
     else
-      printf "${GREY}[$progname] running command '${ACCENT}${command}${GREY}' with env from $envpath..${NC}\n"
+      printf "${GREY}[$progname] running command '${ACCENT}${command}${GREY}' with env from $ENVFILE..${NC}\n"
     fi
   fi
 }
