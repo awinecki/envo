@@ -1,4 +1,4 @@
-Describe 'envo'
+Describe 'envo.sh'
 
   Describe '[base logic]'
 
@@ -13,7 +13,7 @@ Describe 'envo'
         #|barbar
         #|external script has been run
       }
-      When call ./envo -s ./spec/test_external.sh
+      When call ./envo.sh -s ./spec/test_external.sh
       The output should eq "$(result)"
       The status should be success
       rm .env
@@ -30,7 +30,7 @@ Describe 'envo'
         #|foofoo
         #|barbar
       }
-      When call ./envo -s ./spec/test.sh
+      When call ./envo.sh -s ./spec/test.sh
       The status should be success
       The output should eq "$(result)"
       The value "$ENVO_FOO" should equal "old_foo"
@@ -48,7 +48,7 @@ Describe 'envo'
         #|foofoo
         #|barbar
       }
-      When call ./envo -s ./spec/test.sh
+      When call ./envo.sh -s ./spec/test.sh
       The status should be success
       The output should eq "$(result)"
       The value "$ENVO_FOO" should equal ""
@@ -58,7 +58,7 @@ Describe 'envo'
 
     It 'prints nothing when .env is empty'
       touch .env
-      When call ./envo -s ./spec/test.sh
+      When call ./envo.sh -s ./spec/test.sh
       The output should eq ""
       The status should be success
       rm .env
@@ -79,7 +79,7 @@ Describe 'envo'
         #|foofoo
         #|barbar
       }
-      When call ./envo -s -f .my_custom_env_file ./spec/test.sh
+      When call ./envo.sh -s -f .my_custom_env_file ./spec/test.sh
       The output should eq "$(result)"
       The status should be success
       rm .my_custom_env_file
@@ -95,7 +95,7 @@ Describe 'envo'
         #|overriden_foofoo
         #|barbar
       }
-      When call ./envo -s -e ENVO_FOO=overriden_foofoo ./spec/test.sh
+      When call ./envo.sh -s -e ENVO_FOO=overriden_foofoo ./spec/test.sh
       The output should eq "$(result)"
       The status should be success
       rm .env
@@ -111,7 +111,7 @@ Describe 'envo'
         #|overriden_foofoo
         #|overriden_barbar
       }
-      When call ./envo -s -e ENVO_BAR=overriden_barbar -e ENVO_FOO=overriden_foofoo ./spec/test.sh
+      When call ./envo.sh -s -e ENVO_BAR=overriden_barbar -e ENVO_FOO=overriden_foofoo ./spec/test.sh
       The output should eq "$(result)"
       The status should be success
       rm .env
@@ -123,9 +123,9 @@ Describe 'envo'
   Describe '[help]'
     It 'displays help / usage'
       usage_first_line() { %text
-        #|usage: envo [-v] [-h] [-nc] [-s] [-e KEY=VALUE] [-f infile] command
+        #|usage: envo.sh [-v] [-h] [-nc] [-s] [-e KEY=VALUE] [-f infile] command
       }
-      When call ./envo --help
+      When call ./envo.sh --help
       The line 1 of output should eq "$(usage_first_line)"
       The status should be success
     End
@@ -134,10 +134,10 @@ Describe 'envo'
   Describe '[error handling]'
     It 'displays error when running without command'
       usage_first_line() { %text
-        #|usage: envo [-v] [-h] [-nc] [-s] [-e KEY=VALUE] [-f infile] command
+        #|usage: envo.sh [-v] [-h] [-nc] [-s] [-e KEY=VALUE] [-f infile] command
       }
       touch .env
-      When call ./envo -s
+      When call ./envo.sh -s
       The line 1 of output should eq "$(usage_first_line)"
       The status should be failure
       rm .env
@@ -145,7 +145,7 @@ Describe 'envo'
 
     It 'displays error when running nonexistent command'
       usage_first_line() { %text
-        #|[envo] ERROR: command not found
+        #|[envo.sh] ERROR: command not found
       }
       # touch .env
       env_file() { %text
@@ -153,7 +153,7 @@ Describe 'envo'
         #|ENVO_BAR=barbar
       }
       env_file > .env
-      When call ./envo -s -nc some_nonexistent_command with some params
+      When call ./envo.sh -s -nc some_nonexistent_command with some params
       The line 1 of output should eq "$(usage_first_line)"
       The status should be failure
       rm .env
@@ -161,9 +161,9 @@ Describe 'envo'
 
     It 'prints usage when run with no arguments'
       usage_first_line() { %text
-        #|usage: envo [-v] [-h] [-nc] [-s] [-e KEY=VALUE] [-f infile] command
+        #|usage: envo.sh [-v] [-h] [-nc] [-s] [-e KEY=VALUE] [-f infile] command
       }
-      When call ./envo
+      When call ./envo.sh
       The line 1 of output should eq "$(usage_first_line)"
       The status should be failure
     End
