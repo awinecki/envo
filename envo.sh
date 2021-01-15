@@ -39,9 +39,9 @@ function print_running_command() {
   if [[ "$OPT_SILENT" == "false" ]]; then
     command=$1
     if [[ "$OPT_NO_COLORS" == "true" ]]; then
-      printf "[$progname] running command '${command}' with env from $ENVFILE..\n"
+      printf "[$progname] running '${command}' with env from $ENVFILE..\n"
     else
-      printf "${GREY}[$progname] running command '${ACCENT}${command}${GREY}' with env from $ENVFILE..${NC}\n"
+      printf "${GREY}[$progname] running '${ACCENT}${command}${GREY}' with env from $ENVFILE..${NC}\n"
     fi
   fi
 }

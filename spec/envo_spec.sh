@@ -92,7 +92,7 @@ Describe 'envo.sh'
       }
       env_file > .my_custom_env_file
       result() { %text
-        #|[envo.sh] running command './spec/test.sh' with env from .my_custom_env_file..
+        #|[envo.sh] running './spec/test.sh' with env from .my_custom_env_file..
       }
       When call ./envo.sh -nc -f .my_custom_env_file ./spec/test.sh
       The line 2 of output should eq "$(result)"
@@ -185,7 +185,7 @@ Describe 'envo.sh'
 
     It 'explicitly says which dotenv file it uses (simple command)'
       usage_first_line() { %text
-        #|[envo.sh] running command 'ls' with env from .env..
+        #|[envo.sh] running 'ls' with env from .env..
       }
       env_file() { %text
         #|ENVO_FOO=foofoo
@@ -198,7 +198,7 @@ Describe 'envo.sh'
 
     It 'explicitly says which dotenv file it uses (multi-word command)'
       usage_first_line() { %text
-        #|[envo.sh] running command 'ls' with env from .env..
+        #|[envo.sh] running 'ls' with env from .env..
       }
       env_file() { %text
         #|ENVO_FOO=foofoo
