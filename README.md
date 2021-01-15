@@ -28,6 +28,16 @@ rm ~/.local/bin/envo
 
 
 
+## Usage
+
+```
+envo <command>
+```
+
+Any *command* now has access to all env vars defined in `.env` file.
+
+
+
 ## Pros
 
 - Tested with shellspec
