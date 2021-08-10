@@ -17,7 +17,7 @@ It's a simple bash script that can come in handy when working with environment v
 ## Install
 
 ```
-curl https://raw.githubusercontent.com/awinecki/envo/main/envo --output ~/.local/bin/envo && chmod +x ~/.local/bin/envo
+curl https://raw.githubusercontent.com/awinecki/envo/main/envo.sh --output ~/.local/bin/envo --create-dirs && chmod +x ~/.local/bin/envo
 ```
 
 *Uninstall*
