@@ -1,13 +1,8 @@
-# envo
-
 ![CI](https://github.com/awinecki/envo/workflows/CI/badge.svg?branch=main)
-
-
 
 `envo` is a bash CLI helper for loading `.env` (dotenv) as environment variables into any program.
 
 [![asciicast](https://asciinema.org/a/Tn95ATBxcSx0srPFg6mccPCPo.svg)](https://asciinema.org/a/Tn95ATBxcSx0srPFg6mccPCPo)
-
 
 
 It's a simple bash script that can come in handy when working with environment variables, testing stuff out, etc.
