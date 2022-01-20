@@ -1,37 +1,79 @@
-## Welcome to GitHub Pages
+# envo
 
-You can use the [editor on GitHub](https://github.com/awinecki/envo/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+![CI](https://github.com/awinecki/envo/workflows/CI/badge.svg?branch=main)
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+`envo` is a bash CLI helper for loading `.env` (dotenv) as environment variables into any program.
 
-```markdown
-Syntax highlighted code block
+[![asciicast](https://asciinema.org/a/Tn95ATBxcSx0srPFg6mccPCPo.svg)](https://asciinema.org/a/Tn95ATBxcSx0srPFg6mccPCPo)
 
-# Header 1
-## Header 2
-### Header 3
 
-- Bulleted
-- List
 
-1. Numbered
-2. List
+It's a simple bash script that can come in handy when working with environment variables, testing stuff out, etc.
 
-**Bold** and _Italic_ and `Code` text
+## Install
 
-[Link](url) and ![Image](src)
+```
+curl https://raw.githubusercontent.com/awinecki/envo/main/envo.sh --output ~/.local/bin/envo --create-dirs && chmod +x ~/.local/bin/envo
 ```
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+*Uninstall*
 
-### Jekyll Themes
+```
+rm ~/.local/bin/envo
+```
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/awinecki/envo/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
 
-### Support or Contact
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+## Usage
+
+```
+envo <command>
+```
+
+Any *command* now has access to all env vars defined in `.env` file.
+
+
+
+## Pros
+
+- Tested with shellspec
+- Just bash, can work almost anywhere
+- Fast, almost no overhead
+- No need to use libraries for `.env` loading
+- Works in `zsh`, `bash`, `fish` (others probably too, but haven't tested)
+
+
+
+### Why not just use a simple `bashism` for this
+
+There are ways to accomplish this with pure bash / sh, like this:
+
+```
+export (cat .env | xargs) && cmd
+```
+
+However, I've found this approach lacking:
+
+- It doesn't work in all terminals the same (I'm using `fish`)
+- Honestly who remembers this xargs piping spaghetti
+- I like good CLI api, and *prepending* my command with a handy tool that loads env vars resonates with me
+
+
+
+## Features
+
+#### Specify env file (other than the default `.env`)
+
+```
+envo -f /path/to/.custom.env <my_command>
+```
+
+#### Add more env vars
+
+```
+envo -e SOMEVAR=VALUE -e ANOTHER=SECRET <my_command>
+```
+
+For more info, type `envo --help`.
